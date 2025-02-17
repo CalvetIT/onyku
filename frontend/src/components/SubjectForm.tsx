@@ -62,6 +62,28 @@ export function SubjectForm({
       
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px' }}>Library:</label>
+          <select
+            name="libraryId"
+            value={formData.libraryId || ''}
+            onChange={handleInputChange}
+            style={{
+              width: '100%',
+              padding: '8px',
+              border: '1px solid #ccc',
+              borderRadius: '4px'
+            }}
+          >
+            <option value="">No Library (Orphaned)</option>
+            {libraries?.map(library => (
+              <option key={library.id} value={library.id}>
+                {library.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '5px' }}>
             Name *
           </label>
@@ -96,30 +118,6 @@ export function SubjectForm({
               minHeight: '100px'
             }}
           />
-        </div>
-
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '5px' }}>
-            Library (Optional)
-          </label>
-          <select
-            name="libraryId"
-            value={formData.libraryId || ''}
-            onChange={handleInputChange}
-            style={{
-              width: '100%',
-              padding: '8px',
-              border: '1px solid #ccc',
-              borderRadius: '4px'
-            }}
-          >
-            <option value="">No Library (Orphaned)</option>
-            {libraries?.map(library => (
-              <option key={library.id} value={library.id}>
-                {library.name}
-              </option>
-            ))}
-          </select>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
