@@ -2,8 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useGetSubjects, useEditSubject } from '../../hooks/useSubjects'
 import { SubjectForm, FormData } from '../../components/SubjectForm'
 
-const API_BASE_URL = 'http://localhost:4000/subjects'
-
 export function EditSubjectPage() {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
@@ -20,17 +18,9 @@ export function EditSubjectPage() {
       // Remove id from the input data for GraphQL
       const { id: _, ...inputWithoutId } = formData
       
-      // First update in GraphQL
-      const result = await editSubject.mutateAsync({ 
+      await editSubject.mutateAsync({ 
         id: id!, 
         input: inputWithoutId
-      })
-      
-      // Then persist to database
-      await fetch(`${API_BASE_URL}/save`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(result)
       })
       
       navigate('/subjects')
