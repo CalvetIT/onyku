@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["es2018", "esnext.asynciterable"],
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.ts", "src/services/exportFolderService.ts.old", "src/services/GitLibraryDistributionService.ts.old", "src/services/gitLibraryDistributionSpecificationService.ts.old", "src/graphql/resolvers/gitLibraryDistributionSpecificationResolver.ts.old", "src/tests/testGitSubscribe.ts.old", "src/routes/gitLibraryDistributionRoutes.ts.old", "src/domain/entities/GitLibraryDistributionSpecification.ts.old", "src/typeorm/entity/GitLibraryDistributionSpecificationEntity.ts.old", "src/services/importFolderService.ts.old", "src/services/GitHubLibraryDistributionService.ts.old", "src/services/GitSyncService.ts.old", "src/services/exportService.ts.old", "src/services/importService.ts.old", "src/routes/distributionRoutes.ts.old", "src/tests/testNewGitSubscribe.ts.old", "src/tests/testGitPublish.ts.old", "src/domain/entities/ExportTask.ts.old", "src/domain/entities/ImportTask.ts.old", "src/domain/enums/ExportTaskStatus.ts.old", "src/domain/interfaces/ILibraryDistributionService.ts.old"]
+} 

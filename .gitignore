@@ -1,0 +1,71 @@
+# Dependencies
+**/node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# TypeScript
+dist/
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.*
+**/.env
+**/.env.*
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+
+# IDE/Editor specific
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Testing
+coverage/
+
+# Docker volumes
+docker/volumes/
+
+# Temporary files
+tmp/
+temp/
+
+# Build files
+build/
+out/
+
+# Frontend specific
+frontend/dist/
+frontend/build/
+frontend/.cache/
+frontend/coverage/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Transfer files
+**/transferFiles/
+transferFiles/
+*.transfer
+**/*.transfer
+
+# Upload files
+**/uploads/
+uploads/
+*.upload
+**/*.upload
+
+# Git repositories folder
+**/git-repos/
+git-repos/
