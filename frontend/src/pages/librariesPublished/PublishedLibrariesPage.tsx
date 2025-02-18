@@ -84,20 +84,6 @@ export function PublishedLibrariesPage() {
             Publish
           </button>
           <button
-            onClick={() => selectedLibraryId && navigate(`/libraries/${selectedLibraryId}`)}
-            disabled={!selectedLibraryId}
-            style={{ 
-              padding: '8px 16px', 
-              backgroundColor: selectedLibraryId ? '#4CAF50' : '#ccc', 
-              color: 'white', 
-              border: 'none', 
-              borderRadius: '4px',
-              cursor: selectedLibraryId ? 'pointer' : 'default'
-            }}
-          >
-            View
-          </button>
-          <button
             onClick={() => selectedLibraryId && navigate(`/libraries-published/${selectedLibraryId}/sync`)}
             disabled={!selectedLibraryId}
             style={{ 
@@ -109,7 +95,7 @@ export function PublishedLibrariesPage() {
               cursor: selectedLibraryId ? 'pointer' : 'default'
             }}
           >
-            Push
+            Sync Menu
           </button>
         </div>
       </div>
