@@ -12,28 +12,31 @@ export function Layout({ children }: LayoutProps) {
     }
 
     const linkStyle = {
-        padding: '10px 20px',
+        color: 'white',
         textDecoration: 'none',
-        color: '#333',
-        display: 'inline-block'
+        padding: '8px 16px',
+        borderRadius: '4px',
+        transition: 'background-color 0.2s'
     }
 
     const activeLinkStyle = {
         ...linkStyle,
-        borderBottom: '2px solid #2196F3',
-        color: '#2196F3'
+        backgroundColor: 'rgba(255, 255, 255, 0.1)'
     }
 
     return (
         <div>
-            <nav style={{ 
-                borderBottom: '1px solid #eee', 
-                marginBottom: '20px',
-                padding: '0 20px',
-                display: 'flex',
-                justifyContent: 'space-between'
+            <nav style={{
+                backgroundColor: '#2196F3',
+                padding: '12px 24px',
+                marginBottom: '24px'
             }}>
-                <div>
+                <div style={{
+                    display: 'flex',
+                    gap: '16px',
+                    maxWidth: '1200px',
+                    margin: '0 auto'
+                }}>
                     <Link 
                         to="/" 
                         style={isActive('/') && location.pathname === '/' ? activeLinkStyle : linkStyle}
@@ -42,7 +45,7 @@ export function Layout({ children }: LayoutProps) {
                     </Link>
                     <Link 
                         to="/libraries" 
-                        style={isActive('/libraries') && !isActive('/libraries-published') ? activeLinkStyle : linkStyle}
+                        style={isActive('/libraries') && !isActive('/libraries-') ? activeLinkStyle : linkStyle}
                     >
                         Libraries
                     </Link>
@@ -58,13 +61,17 @@ export function Layout({ children }: LayoutProps) {
                     >
                         Questions
                     </Link>
-                </div>
-                <div>
                     <Link 
                         to="/libraries-published" 
                         style={isActive('/libraries-published') ? activeLinkStyle : linkStyle}
                     >
                         Libraries Published
+                    </Link>
+                    <Link 
+                        to="/libraries-subscribed" 
+                        style={isActive('/libraries-subscribed') ? activeLinkStyle : linkStyle}
+                    >
+                        Libraries Subscribed
                     </Link>
                 </div>
             </nav>

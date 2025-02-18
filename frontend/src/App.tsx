@@ -24,6 +24,11 @@ import {
     PublishLibraryPage,
     PublishedLibrarySyncPage
 } from './pages/librariesPublished'
+import {
+    SubscribedLibrariesPage,
+    SubscribedLibrarySyncPage,
+    SubscribeLibraryPage
+} from './pages/librariesSubscribed'
 
 export function App() {
     return (
@@ -54,6 +59,11 @@ export function App() {
                     <Route path="/libraries-published" element={<PublishedLibrariesPage />} />
                     <Route path="/libraries-published/publish" element={<PublishLibraryPage />} />
                     <Route path="/libraries-published/:id/sync" element={<PublishedLibrarySyncPage />} />
+
+                    {/* Subscribed Libraries routes */}
+                    <Route path="/libraries-subscribed" element={<SubscribedLibrariesPage />} />
+                    <Route path="/libraries-subscribed/subscribe" element={<SubscribeLibraryPage />} />
+                    <Route path="/libraries-subscribed/:id/sync" element={<SubscribedLibrarySyncPage />} />
                 </Routes>
             </Layout>
         </BrowserRouter>
