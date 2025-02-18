@@ -1,1 +1,2 @@
-export { PublishedLibrariesPage } from './PublishedLibrariesPage' 
+export { PublishedLibrariesPage } from './PublishedLibrariesPage'
+export { PublishLibraryPage } from './PublishLibraryPage' 

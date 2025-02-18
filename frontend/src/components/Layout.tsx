@@ -8,42 +8,67 @@ export function Layout({ children }: LayoutProps) {
     const location = useLocation();
     
     const isActive = (path: string) => {
-        return location.pathname === path ? 'bg-blue-700 text-white' : 'text-blue-700';
+        return location.pathname.startsWith(path)
+    }
+
+    const linkStyle = {
+        padding: '10px 20px',
+        textDecoration: 'none',
+        color: '#333',
+        display: 'inline-block'
+    }
+
+    const activeLinkStyle = {
+        ...linkStyle,
+        borderBottom: '2px solid #2196F3',
+        color: '#2196F3'
     }
 
     return (
         <div>
-            <nav className="bg-blue-900 text-white">
-                <div className="container mx-auto">
-                    <div className="flex h-14 items-center space-x-8 px-4">
-                        <Link 
-                            to="/" 
-                            className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 ${isActive('/')}`}
-                        >
-                            Home
-                        </Link>
-                        <Link 
-                            to="/libraries" 
-                            className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 ${isActive('/libraries')}`}
-                        >
-                            Libraries
-                        </Link>
-                        <Link 
-                            to="/subjects" 
-                            className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 ${isActive('/subjects')}`}
-                        >
-                            Subjects
-                        </Link>
-                        <Link 
-                            to="/questions" 
-                            className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 ${isActive('/questions')}`}
-                        >
-                            Questions
-                        </Link>
-                    </div>
+            <nav style={{ 
+                borderBottom: '1px solid #eee', 
+                marginBottom: '20px',
+                padding: '0 20px',
+                display: 'flex',
+                justifyContent: 'space-between'
+            }}>
+                <div>
+                    <Link 
+                        to="/" 
+                        style={isActive('/') && location.pathname === '/' ? activeLinkStyle : linkStyle}
+                    >
+                        Home
+                    </Link>
+                    <Link 
+                        to="/libraries" 
+                        style={isActive('/libraries') && !isActive('/libraries-published') ? activeLinkStyle : linkStyle}
+                    >
+                        Libraries
+                    </Link>
+                    <Link 
+                        to="/subjects" 
+                        style={isActive('/subjects') ? activeLinkStyle : linkStyle}
+                    >
+                        Subjects
+                    </Link>
+                    <Link 
+                        to="/questions" 
+                        style={isActive('/questions') ? activeLinkStyle : linkStyle}
+                    >
+                        Questions
+                    </Link>
+                </div>
+                <div>
+                    <Link 
+                        to="/libraries-published" 
+                        style={isActive('/libraries-published') ? activeLinkStyle : linkStyle}
+                    >
+                        Libraries Published
+                    </Link>
                 </div>
             </nav>
-            <main className="container mx-auto px-4 py-6">
+            <main>
                 {children}
             </main>
         </div>

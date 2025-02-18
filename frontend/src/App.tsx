@@ -19,7 +19,10 @@ import {
     EditSubjectPage,
     ViewSubjectPage
 } from './pages/subjects'
-import { PublishedLibrariesPage } from './pages/librariesPublished'
+import {
+    PublishedLibrariesPage,
+    PublishLibraryPage
+} from './pages/librariesPublished'
 
 export function App() {
     return (
@@ -48,6 +51,7 @@ export function App() {
                     
                     {/* Published Libraries routes */}
                     <Route path="/libraries-published" element={<PublishedLibrariesPage />} />
+                    <Route path="/libraries-published/publish" element={<PublishLibraryPage />} />
                 </Routes>
             </Layout>
         </BrowserRouter>
