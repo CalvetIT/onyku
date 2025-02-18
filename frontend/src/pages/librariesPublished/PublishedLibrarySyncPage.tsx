@@ -43,14 +43,27 @@ export function PublishedLibrarySyncPage() {
         borderRadius: '4px',
         marginBottom: '20px'
       }}>
-        <h2 style={{ fontSize: '1.2em', marginBottom: '10px' }}>{library.name}</h2>
-        <div style={{ color: '#666', marginBottom: '20px' }}>{library.description}</div>
-        
         <div style={{ 
           display: 'grid',
           gap: '10px',
           marginBottom: '20px'
         }}>
+          <div>
+            <strong>Library Name: </strong> 
+            {library.name}
+          </div>
+          <div>
+            <strong>Library ID: </strong> 
+            {specification.libraryId}
+          </div>
+          <div>
+            <strong>Library Description: </strong> 
+            {library.description}
+          </div>
+          <div>
+            <strong>Maintainer: </strong> 
+            {library.maintainer || 'Not specified'}
+          </div>
           <div>
             <strong>Repository URL: </strong> 
             <a 
@@ -69,6 +82,12 @@ export function PublishedLibrarySyncPage() {
           <div>
             <strong>Visibility: </strong> 
             {specification.visibility}
+          </div>
+          <div>
+            <strong>Created: </strong> 
+            {specification.createdAt 
+              ? new Date(Number(specification.createdAt)).toLocaleString()
+              : 'Unknown'}
           </div>
           <div>
             <strong>Last Synced: </strong> 
