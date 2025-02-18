@@ -21,7 +21,8 @@ import {
 } from './pages/subjects'
 import {
     PublishedLibrariesPage,
-    PublishLibraryPage
+    PublishLibraryPage,
+    PublishedLibrarySyncPage
 } from './pages/librariesPublished'
 
 export function App() {
@@ -52,6 +53,7 @@ export function App() {
                     {/* Published Libraries routes */}
                     <Route path="/libraries-published" element={<PublishedLibrariesPage />} />
                     <Route path="/libraries-published/publish" element={<PublishLibraryPage />} />
+                    <Route path="/libraries-published/:id/sync" element={<PublishedLibrarySyncPage />} />
                 </Routes>
             </Layout>
         </BrowserRouter>

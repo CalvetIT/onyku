@@ -98,7 +98,7 @@ export function PublishedLibrariesPage() {
             View
           </button>
           <button
-            onClick={() => selectedLibraryId && navigate(`/libraries-published/push/${selectedLibraryId}`)}
+            onClick={() => selectedLibraryId && navigate(`/libraries-published/${selectedLibraryId}/sync`)}
             disabled={!selectedLibraryId}
             style={{ 
               padding: '8px 16px', 
