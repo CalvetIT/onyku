@@ -20,6 +20,20 @@ function extractRepoInfo(repositoryUrl: string): { owner: string; name: string }
     return { owner: match[1], name: match[2] }
 }
 
+async function emptyDirectory(directory: string): Promise<void> {
+    const files = await fs.readdir(directory)
+    for (const file of files) {
+        if (file === '.git') continue // Preserve .git directory
+        const filePath = path.join(directory, file)
+        const stat = await fs.stat(filePath)
+        if (stat.isDirectory()) {
+            await fs.rm(filePath, { recursive: true })
+        } else {
+            await fs.unlink(filePath)
+        }
+    }
+}
+
 export async function pushLibraryUpdatesToOnlineGitRepository(
     specification: OnlineGitRepositorySpecification
 ): Promise<Task> {
@@ -40,10 +54,25 @@ export async function pushLibraryUpdatesToOnlineGitRepository(
         // Get repository path
         const { owner, name } = extractRepoInfo(specification.repositoryUrl)
         const repoPath = path.join(process.cwd(), 'data/git-repos', `${owner}-${name}`)
+        const git = simpleGit(repoPath)
 
-        // Clean/create repository directory
-        await fs.rm(repoPath, { recursive: true, force: true })
-        await fs.mkdir(repoPath, { recursive: true })
+        // Check if repo exists and initialize/clone if needed
+        const repoExists = await fs.access(repoPath).then(() => true).catch(() => false)
+        if (!repoExists) {
+            // Create directory and clone repository
+            await fs.mkdir(repoPath, { recursive: true })
+            await git.clone(specification.getAuthUrl(), repoPath)
+            
+            // Configure git
+            await git.addConfig('user.name', 'Library Sync Bot')
+            await git.addConfig('user.email', 'library-sync@noreply.local')
+        } else {
+            // Pull latest changes
+            await git.pull('origin', 'main')
+        }
+
+        // Empty the working directory (preserving .git)
+        await emptyDirectory(repoPath)
 
         // Export library to the folder
         await libraryLocalFolderService.exportLibraryClone(
@@ -51,25 +80,18 @@ export async function pushLibraryUpdatesToOnlineGitRepository(
             repoPath
         )
 
-        // Initialize git and push changes
-        const git = simpleGit(repoPath)
-        
-        // Initialize git repository
-        await git.init()
-        
-        // Configure git (using generic details since this is automated)
-        await git.addConfig('user.name', 'Library Sync Bot')
-        await git.addConfig('user.email', 'library-sync@noreply.local')
-
-        // Add all files
+        // Add all changes
         await git.add('.')
         
-        // Commit changes
-        await git.commit('Update library content')
-        
-        // Add remote and push
-        await git.addRemote('origin', specification.getAuthUrl())
-        await git.push('origin', 'main', ['--force']) // Using force to avoid conflicts
+        // Check if there are changes to commit
+        const status = await git.status()
+        if (!status.isClean()) {
+            // Commit changes
+            await git.commit('Update library content')
+            
+            // Push changes (without force)
+            await git.push('origin', 'main')
+        }
 
         // Update task status
         await taskService.updateTask({
