@@ -9,9 +9,9 @@
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:clean": "docker-compose -f docker/docker-compose.yml down -v",
-    "db:up": "npm run db:clean && docker-compose -f docker/docker-compose.yml up -d",
-    "db:down": "docker-compose -f docker/docker-compose.yml down -v",
+    "db:clean": "docker-compose -f docker/docker-compose.yml -p knowledge-sharing down -v",
+    "db:up": "npm run db:clean && docker-compose -f docker/docker-compose.yml -p knowledge-sharing up -d",
+    "db:down": "docker-compose -f docker/docker-compose.yml -p knowledge-sharing down -v",
     "prestop": "npm run db:down"
   },
   "keywords": [],
