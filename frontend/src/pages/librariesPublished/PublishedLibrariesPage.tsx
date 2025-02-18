@@ -2,11 +2,13 @@ import { useGetOnlineGitRepositorySpecifications } from '../../hooks/useGetOnlin
 import { useGetLibraries } from '../../hooks/useLibraries'
 import { useNavigate } from 'react-router-dom'
 import { DistributionMethod } from '../../enums/DistributionMethod'
+import { useState } from 'react'
 
 export function PublishedLibrariesPage() {
   const { data: specifications, isLoading: isLoadingSpecs } = useGetOnlineGitRepositorySpecifications()
   const { data: libraries, isLoading: isLoadingLibs } = useGetLibraries()
   const navigate = useNavigate()
+  const [selectedLibraryId, setSelectedLibraryId] = useState<string | null>(null)
 
   if (isLoadingSpecs || isLoadingLibs) return <div>Loading...</div>
 
@@ -14,7 +16,6 @@ export function PublishedLibrariesPage() {
     spec => spec.distributionMethod === DistributionMethod.PUBLISHED
   ) || []
 
-  // Combine specifications with library details
   const publishedLibraries = publishedSpecs.map(spec => {
     const library = libraries?.find(lib => lib.id === spec.libraryId)
     return {
@@ -25,46 +26,92 @@ export function PublishedLibrariesPage() {
   })
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl">Published Libraries</h1>
-        <button 
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          onClick={() => navigate('/libraries-published/publish')}
-        >
-          Publish New Library
-        </button>
-      </div>
-
-      <div className="grid gap-4">
-        {publishedLibraries.map(library => (
-          <div key={library.id} className="border p-4 rounded">
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="font-bold text-lg">{library.name}</h3>
-                <p className="text-gray-600 mt-1">{library.description}</p>
-                <div className="mt-2 space-y-1 text-sm text-gray-500">
-                  <p>Repository: {library.repositoryUrl}</p>
-                  <p>Provider: {library.provider}</p>
-                  <p>Last Synced: {library.lastSyncAt ? new Date(library.lastSyncAt).toLocaleString() : 'Never'}</p>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <button 
-                  className="bg-green-500 text-white px-4 py-2 rounded"
-                  onClick={() => navigate(`/libraries-published/push/${library.libraryId}`)}
-                >
-                  Push Updates
-                </button>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+      <h1 style={{ marginBottom: '20px' }}>Published Libraries</h1>
+      
+      <div style={{ display: 'flex', gap: '20px' }}>
+        {/* Libraries List */}
+        <div style={{ 
+          flex: 1,
+          maxHeight: '500px', 
+          overflowY: 'auto', 
+          border: '1px solid #ccc', 
+          borderRadius: '4px' 
+        }}>
+          {publishedLibraries.map(library => (
+            <div 
+              key={library.id}
+              onClick={() => setSelectedLibraryId(library.id)}
+              style={{
+                padding: '12px',
+                borderBottom: '1px solid #eee',
+                backgroundColor: selectedLibraryId === library.id ? '#e3f2fd' : 'white',
+                cursor: 'pointer'
+              }}
+            >
+              <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>{library.name}</div>
+              <div style={{ color: '#666' }}>{library.description}</div>
+              <div style={{ color: '#888', fontSize: '0.9em', marginTop: '4px' }}>
+                {library.repositoryUrl}
               </div>
             </div>
-          </div>
-        ))}
-        {publishedLibraries.length === 0 && (
-          <div className="text-center py-8 text-gray-500">
-            No published libraries found. Click "Publish New Library" to get started.
-          </div>
-        )}
+          ))}
+          {publishedLibraries.length === 0 && (
+            <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+              No published libraries found
+            </div>
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div style={{ 
+          width: '120px',
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: '10px' 
+        }}>
+          <button
+            onClick={() => navigate('/libraries-published/publish')}
+            style={{ 
+              padding: '8px 16px', 
+              backgroundColor: '#2196F3', 
+              color: 'white', 
+              border: 'none', 
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Publish
+          </button>
+          <button
+            onClick={() => selectedLibraryId && navigate(`/libraries/${selectedLibraryId}`)}
+            disabled={!selectedLibraryId}
+            style={{ 
+              padding: '8px 16px', 
+              backgroundColor: selectedLibraryId ? '#4CAF50' : '#ccc', 
+              color: 'white', 
+              border: 'none', 
+              borderRadius: '4px',
+              cursor: selectedLibraryId ? 'pointer' : 'default'
+            }}
+          >
+            View
+          </button>
+          <button
+            onClick={() => selectedLibraryId && navigate(`/libraries-published/push/${selectedLibraryId}`)}
+            disabled={!selectedLibraryId}
+            style={{ 
+              padding: '8px 16px', 
+              backgroundColor: selectedLibraryId ? '#2196F3' : '#ccc', 
+              color: 'white', 
+              border: 'none', 
+              borderRadius: '4px',
+              cursor: selectedLibraryId ? 'pointer' : 'default'
+            }}
+          >
+            Push
+          </button>
+        </div>
       </div>
     </div>
   )
