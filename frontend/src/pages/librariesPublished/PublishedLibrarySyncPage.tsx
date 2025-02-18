@@ -15,6 +15,7 @@ export function PublishedLibrarySyncPage() {
   if (isLoadingSpecs || isLoadingLibs) return <div>Loading...</div>
 
   const specification = specifications?.find(spec => spec.id === id)
+  console.log('Last sync date:', specification.lastSyncAt)
   const library = libraries?.find(lib => lib.id === specification?.libraryId)
 
   if (!specification || !library) {
@@ -72,8 +73,8 @@ export function PublishedLibrarySyncPage() {
           <div>
             <strong>Last Synced: </strong> 
             {specification.lastSyncAt 
-              ? new Date(specification.lastSyncAt).toLocaleString() 
-              : 'Never'}
+              ? new Date(Number(specification.lastSyncAt)).toLocaleString()
+              : 'Never synced'}
           </div>
         </div>
 
