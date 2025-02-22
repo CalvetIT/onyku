@@ -32,9 +32,24 @@ It is not the case yet.
 The sofware has been tested so far on a Windows 11 machines with WSL2 and docker desktop installed on Windows.  
 To follow an API-first approach during development, the backend and frontend are separated.
 
+From Windows start Docker Desktop.
+
+Only first time:
+Configure the integration with WSL2.
+Settings>Ressources>WSL Integration
+Tick "Enable integration with my default WSL distro"
+Enable integration with additional distros (Ubuntu in my case)
+
+Docker Desktop must be running before starting the backend.
+
 From wsl, open the terminal and run the following commands:
 ```
 cd backend/knowledgeSharing/
+First time only: generate an encryption key
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+create the .env file using the .env.example file as template and paste the encryption key generated above.
+
+
 npm install
 npm run dev
 ```
