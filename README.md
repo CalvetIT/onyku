@@ -2,8 +2,8 @@
 
 - Website: https://calvetit.com/onyku/
 
-The ambitition is to create a collaborative IT design software.  
-At its core, Onyku™ relies on and contributes to Open Knowledge principles, making them an integral part of its DNA.  
+Onyku™ is an open-source project aimed at creating an IT design standard and multiple guidelines standards, facilitating knowledge sharing among IT professionals, and developing IT design software that adheres to these standards.
+This software also facilitates the creation and sharing of knowledge in these standards, leveraging Git repository hosts.
 
 The product is in its very early stages, with only a basic proof of concept for the knowledge-sharing module, which is **not** production-ready.  
 We aim to hire a senior software engineer as soon as financially feasible, who will be responsible for redesigning it and building the core product.  
@@ -32,8 +32,9 @@ It is not the case yet.
 The sofware has been tested so far on a Windows 11 machines with WSL2 and docker desktop installed on Windows.  
 To follow an API-first approach during development, the backend and frontend are separated.
 
+# Prerequisites
+## Docker Desktop
 From Windows start Docker Desktop.
-
 Only first time:
 Configure the integration with WSL2.
 Settings>Ressources>WSL Integration
@@ -42,18 +43,25 @@ Enable integration with additional distros (Ubuntu in my case)
 
 Docker Desktop must be running before starting the backend.
 
-From wsl, open the terminal and run the following commands:
-```
+## Encryption key
 cd backend/knowledgeSharing/
 First time only: generate an encryption key
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 create the .env file using the .env.example file as template and paste the encryption key generated above.
 
+# Start the application
 
+## Backend
+
+From wsl, open the terminal and run the following commands:
+```
+cd backend/knowledgeSharing/
 npm install
 npm run dev
 ```
-It will also create a docker container and run the database there.
+It will also create a docker container for the database on Docker Desktop.
+
+## Start the frontend
 
 Then in another terminal, run the following commands:
 ```
@@ -61,6 +69,15 @@ cd frontend/
 npm install
 npm run dev
 ```
+
+# Access the application
+You can either use a graphQL client to work with the bakcend directly.
+localhost:4000/graphql
+
+Or the recommend way, the frontend GUI.
+http://localhost:5173/
+
+
 
 # Contributing
 
