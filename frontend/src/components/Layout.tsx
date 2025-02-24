@@ -59,7 +59,7 @@ export function Layout({ children }: LayoutProps) {
                         to="/questions" 
                         style={isActive('/questions') ? activeLinkStyle : linkStyle}
                     >
-                        Questions
+                        IT Design Question Guidelines
                     </Link>
                     <Link 
                         to="/libraries-published" 

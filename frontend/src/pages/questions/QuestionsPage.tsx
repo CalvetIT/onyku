@@ -20,7 +20,7 @@ export function QuestionsPage() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
-      <h1 style={{ marginBottom: '20px' }}>Questions</h1>
+      <h1 style={{ marginBottom: '20px' }}>IT Design Question Guidelines</h1>
       
       <div style={{ display: 'flex', gap: '20px' }}>
         {/* Questions List */}
