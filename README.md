@@ -2,8 +2,7 @@
 
 - Website: https://calvetit.com/onyku/
 
-Onyku™ is an open-source project aimed at creating an IT design standard and multiple guidelines standards, facilitating knowledge sharing among IT professionals, and developing IT design software that adheres to these standards.
-This software also facilitates the creation and sharing of knowledge in these standards, leveraging Git repository hosts.
+Onyku™ is an open-source project aimed at creating an IT design standard, guideline standards, and developing an IT design software that adheres to them. This software facilitates the creation and sharing of knowledge in these standards, leveraging Git repositories to enhance collaboration among IT professionals
 
 The product is in its very early stages, with only a basic proof of concept for the knowledge-sharing module, which is **not** production-ready.  
 We aim to hire a senior software engineer as soon as financially feasible, who will be responsible for redesigning it and building the core product.  
@@ -44,9 +43,10 @@ Enable integration with additional distros (Ubuntu in my case)
 Docker Desktop must be running before starting the backend.
 
 ## Encryption key
+```
 cd backend/knowledgeSharing/
-First time only: generate an encryption key
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
 create the .env file using the .env.example file as template and paste the encryption key generated above.
 
 # Start the application
@@ -71,7 +71,7 @@ npm run dev
 ```
 
 # Access the application
-You can either use a graphQL client to work with the bakcend directly.
+You can either use a graphQL client to work with the backend directly.
 localhost:4000/graphql
 
 Or the recommend way, the frontend GUI.
@@ -86,6 +86,18 @@ Discussions are planned there to identify which platform to use in the future.
 Please [contact us](https://calvetit.com/contact-us/) to receive an invitation.  
 
 This is a work in progress with some areas still unclear, such as policies for contributing via pull requests.
+
+# Proof of concept walkthrough
+
+See [POC_Walkthrought_2025_02_24.md](./docs/POC_Walkthrought_2025_02_24.md)
+
+# Screenshots
+
+## Home page
+![Home page](./docs/images/Home_2025_02_24.png)
+
+## Create a IT Design Question Guideline
+![IT Design Question Guideline](./docs/images/Create_IT_Design_Question_Guideline_2025_02_24.png)
 
 
 
