@@ -89,7 +89,7 @@ This is a work in progress with some areas still unclear, such as policies for c
 
 # Proof of concept walkthrough
 
-See [POC_Walkthrought_2025_02_24.md](./docs/POC_Walkthrought_2025_02_24.md)
+See [POC_Walkthrough_2025_02_24.md](./docs/POC_Walkthrough_2025_02_24.md)
 
 # Screenshots
 
