@@ -65,7 +65,10 @@ export function QuestionForm({ initialData = defaultFormData, onSubmit, title, s
 
     useEffect(() => {
         if (mode === 'edit' && initialData.id) {
-            setFormData(initialData)
+            setFormData({
+                ...initialData,
+                diagrams: initialData.diagrams || []
+            })
         } else {
             setFormData(defaultFormData)
         }

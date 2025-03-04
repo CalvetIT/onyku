@@ -7,7 +7,8 @@ export class InMemoryQuestionService {
             ...q,
             relatedConcepts: Array.isArray(q.relatedConcepts) ? q.relatedConcepts : [],
             potentialReplies: Array.isArray(q.potentialReplies) ? q.potentialReplies : [],
-            potentialKeyConsiderations: Array.isArray(q.potentialKeyConsiderations) ? q.potentialKeyConsiderations : []
+            potentialKeyConsiderations: Array.isArray(q.potentialKeyConsiderations) ? q.potentialKeyConsiderations : [],
+            diagrams: Array.isArray(q.diagrams) ? q.diagrams : []
         }))
     }
 
@@ -19,7 +20,8 @@ export class InMemoryQuestionService {
             ...question,
             relatedConcepts: Array.isArray(question.relatedConcepts) ? question.relatedConcepts : [],
             potentialReplies: Array.isArray(question.potentialReplies) ? question.potentialReplies : [],
-            potentialKeyConsiderations: Array.isArray(question.potentialKeyConsiderations) ? question.potentialKeyConsiderations : []
+            potentialKeyConsiderations: Array.isArray(question.potentialKeyConsiderations) ? question.potentialKeyConsiderations : [],
+            diagrams: Array.isArray(question.diagrams) ? question.diagrams : []
         }
     }
 
@@ -28,7 +30,8 @@ export class InMemoryQuestionService {
             ...question,
             relatedConcepts: Array.isArray(question.relatedConcepts) ? question.relatedConcepts : [],
             potentialReplies: Array.isArray(question.potentialReplies) ? question.potentialReplies : [],
-            potentialKeyConsiderations: Array.isArray(question.potentialKeyConsiderations) ? question.potentialKeyConsiderations : []
+            potentialKeyConsiderations: Array.isArray(question.potentialKeyConsiderations) ? question.potentialKeyConsiderations : [],
+            diagrams: Array.isArray(question.diagrams) ? question.diagrams : []
         }
         questions.push(newQuestion)
         return newQuestion
@@ -50,7 +53,10 @@ export class InMemoryQuestionService {
                 : (existingQuestion.potentialReplies || []),
             potentialKeyConsiderations: Array.isArray(updatedQuestion.potentialKeyConsiderations) 
                 ? updatedQuestion.potentialKeyConsiderations 
-                : (existingQuestion.potentialKeyConsiderations || [])
+                : (existingQuestion.potentialKeyConsiderations || []),
+            diagrams: Array.isArray(updatedQuestion.diagrams)
+                ? updatedQuestion.diagrams
+                : (existingQuestion.diagrams || [])
         }
         
         questions[index] = mergedQuestion
@@ -73,7 +79,8 @@ export class InMemoryQuestionService {
             ...q,
             relatedConcepts: Array.isArray(q.relatedConcepts) ? q.relatedConcepts : [],
             potentialReplies: Array.isArray(q.potentialReplies) ? q.potentialReplies : [],
-            potentialKeyConsiderations: Array.isArray(q.potentialKeyConsiderations) ? q.potentialKeyConsiderations : []
+            potentialKeyConsiderations: Array.isArray(q.potentialKeyConsiderations) ? q.potentialKeyConsiderations : [],
+            diagrams: Array.isArray(q.diagrams) ? q.diagrams : []
         })))
     }
 } 

@@ -2,7 +2,7 @@ import React from 'react'
 import { DiagramEditor } from './DiagramEditor'
 import { Diagram, DiagramSectionProps } from './types'
 
-export function DiagramSection({ diagrams, onChange }: DiagramSectionProps) {
+export function DiagramSection({ diagrams = [], onChange }: DiagramSectionProps) {
     const [openPreviews, setOpenPreviews] = React.useState<Record<number, boolean>>({})
 
     const addDiagram = () => {
