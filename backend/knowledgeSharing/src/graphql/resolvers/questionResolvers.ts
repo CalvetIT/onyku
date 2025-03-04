@@ -14,7 +14,8 @@ export const questionResolvers = {
                     ...q,
                     relatedConcepts: q.relatedConcepts || [],
                     potentialReplies: q.potentialReplies || [],
-                    potentialKeyConsiderations: q.potentialKeyConsiderations || []
+                    potentialKeyConsiderations: q.potentialKeyConsiderations || [],
+                    diagrams: q.diagrams || []
                 }))
             }
         },
@@ -30,7 +31,8 @@ export const questionResolvers = {
                     ...question,
                     relatedConcepts: question.relatedConcepts || [],
                     potentialReplies: question.potentialReplies || [],
-                    potentialKeyConsiderations: question.potentialKeyConsiderations || []
+                    potentialKeyConsiderations: question.potentialKeyConsiderations || [],
+                    diagrams: question.diagrams || []
                 }
             }
         }
@@ -48,7 +50,8 @@ export const questionResolvers = {
                     ...question,
                     relatedConcepts: question.relatedConcepts || [],
                     potentialReplies: question.potentialReplies || [],
-                    potentialKeyConsiderations: question.potentialKeyConsiderations || []
+                    potentialKeyConsiderations: question.potentialKeyConsiderations || [],
+                    diagrams: question.diagrams || []
                 }
             }
         },
@@ -68,7 +71,8 @@ export const questionResolvers = {
                     ...question,
                     relatedConcepts: question.relatedConcepts || [],
                     potentialReplies: question.potentialReplies || [],
-                    potentialKeyConsiderations: question.potentialKeyConsiderations || []
+                    potentialKeyConsiderations: question.potentialKeyConsiderations || [],
+                    diagrams: question.diagrams || []
                 }
                 
                 console.log('6. Resolver updateQuestion - Final result:', result)

@@ -3,6 +3,7 @@ import { Question } from "../../domain/entities/Question";
 import { PotentialReply } from "../../domain/valueObjects/PotentialReply";
 import { PotentialKeyConsideration } from "../../domain/valueObjects/PotentialKeyConsideration";
 import { RelatedConcept } from "../../domain/valueObjects/RelatedConcept";
+import { Diagram } from "../../domain/valueObjects/Diagram";
 
 @Entity('questions')
 export class QuestionEntity implements Question {
@@ -26,4 +27,7 @@ export class QuestionEntity implements Question {
 
     @Column('jsonb', { nullable: true, default: [] })
     relatedConcepts?: RelatedConcept[];
+
+    @Column('jsonb', { nullable: true, default: [] })
+    diagrams?: Diagram[];
 } 

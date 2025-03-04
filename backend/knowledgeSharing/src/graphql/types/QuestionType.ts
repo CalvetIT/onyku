@@ -122,6 +122,23 @@ const RelatedConceptInput = new GraphQLInputObjectType({
     }
 })
 
+// Add new Diagram types
+const DiagramType = new GraphQLObjectType({
+    name: 'Diagram',
+    fields: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        diagramCode: { type: new GraphQLNonNull(GraphQLString) }
+    }
+})
+
+const DiagramInput = new GraphQLInputObjectType({
+    name: 'DiagramInput',
+    fields: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        diagramCode: { type: new GraphQLNonNull(GraphQLString) }
+    }
+})
+
 // Main Question Types
 export const QuestionType = new GraphQLObjectType({
     name: 'Question',
@@ -141,6 +158,10 @@ export const QuestionType = new GraphQLObjectType({
         potentialKeyConsiderations: { 
             type: new GraphQLNonNull(new GraphQLList(PotentialKeyConsiderationType)),
             resolve: parent => parent.potentialKeyConsiderations || []
+        },
+        diagrams: { 
+            type: new GraphQLNonNull(new GraphQLList(DiagramType)),
+            resolve: parent => parent.diagrams || []
         }
     }
 })
@@ -153,6 +174,7 @@ export const QuestionInput = new GraphQLInputObjectType({
         potentialKeyConsiderations: { type: new GraphQLList(new GraphQLNonNull(PotentialKeyConsiderationInput)) },
         subjectId: { type: GraphQLString },
         relatedConcepts: { type: new GraphQLList(new GraphQLNonNull(RelatedConceptInput)) },
-        notes: { type: GraphQLString }
+        notes: { type: GraphQLString },
+        diagrams: { type: new GraphQLList(new GraphQLNonNull(DiagramInput)) }
     }
 }) 

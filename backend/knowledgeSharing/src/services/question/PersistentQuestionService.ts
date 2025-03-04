@@ -15,6 +15,7 @@ export class PersistentQuestionService {
         entity.potentialReplies = question.potentialReplies
         entity.potentialKeyConsiderations = question.potentialKeyConsiderations
         entity.relatedConcepts = question.relatedConcepts
+        entity.diagrams = question.diagrams
         return entity
     }
 

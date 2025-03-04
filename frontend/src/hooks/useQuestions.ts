@@ -43,6 +43,10 @@ export function useGetQuestions() {
               description
               externalReferences
             }
+            diagrams {
+              title
+              diagramCode
+            }
           }
         }
       `)
@@ -86,6 +90,10 @@ export function useCreateQuestion() {
             potentialKeyConsiderations {
               description
               externalReferences
+            }
+            diagrams {
+              title
+              diagramCode
             }
           }
         }
@@ -157,6 +165,10 @@ export function useEditQuestion() {
                 description
                 externalReferences
               }
+              diagrams {
+                title
+                diagramCode
+              }
             }
           }
         `, { id })
@@ -192,6 +204,10 @@ export function useEditQuestion() {
                 description
                 externalReferences
               }
+              diagrams {
+                title
+                diagramCode
+              }
             }
           }
         `, { 
@@ -200,7 +216,8 @@ export function useEditQuestion() {
             ...input,
             relatedConcepts: input.relatedConcepts || [],
             potentialReplies: input.potentialReplies || [],
-            potentialKeyConsiderations: input.potentialKeyConsiderations || []
+            potentialKeyConsiderations: input.potentialKeyConsiderations || [],
+            diagrams: input.diagrams || []
           }
         })
 

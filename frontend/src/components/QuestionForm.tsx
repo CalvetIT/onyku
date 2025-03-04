@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Quality, Impact } from '../types/enums'
 import { useGetSubjects } from '../hooks/useSubjects'
+import { DiagramSection } from './diagrams'
 
 interface RelatedConcept {
     searchQueryDefinition: string
@@ -33,6 +34,10 @@ export interface FormData {
     subjectId?: string
     relatedConcepts?: RelatedConcept[]
     notes: string
+    diagrams: Array<{
+        title: string
+        diagramCode: string
+    }>
 }
 
 interface QuestionFormProps {
@@ -49,7 +54,8 @@ const defaultFormData: FormData = {
     potentialKeyConsiderations: [],
     subjectId: undefined,
     relatedConcepts: [],
-    notes: ''
+    notes: '',
+    diagrams: []
 }
 
 export function QuestionForm({ initialData = defaultFormData, onSubmit, title, submitButtonText, mode }: QuestionFormProps) {
@@ -59,7 +65,10 @@ export function QuestionForm({ initialData = defaultFormData, onSubmit, title, s
 
     useEffect(() => {
         if (mode === 'edit' && initialData.id) {
-            setFormData(initialData)
+            setFormData({
+                ...initialData,
+                diagrams: initialData.diagrams || []
+            })
         } else {
             setFormData(defaultFormData)
         }
@@ -714,6 +723,17 @@ export function QuestionForm({ initialData = defaultFormData, onSubmit, title, s
                                                        value={formData.notes}
                                                        onChange={e => setFormData(prev => ({ ...prev, notes: e.target.value }))}
                                                        style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc', minHeight: '100px' }}
+                                                   />
+                                               </div>
+                               
+                                               {/* Diagram Section */}
+                                               <div style={{ marginBottom: '20px' }}>
+                                                   <DiagramSection 
+                                                       diagrams={formData.diagrams}
+                                                       onChange={(newDiagrams) => setFormData(prev => ({ 
+                                                           ...prev, 
+                                                           diagrams: newDiagrams 
+                                                       }))}
                                                    />
                                                </div>
                                
