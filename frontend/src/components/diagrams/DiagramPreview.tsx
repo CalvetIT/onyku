@@ -59,7 +59,7 @@ export function DiagramPreview({ diagram, onClose }: DiagramPreviewProps) {
                         onClick={onClose}
                         style={{ 
                             padding: '4px 8px', 
-                            backgroundColor: '#ccc', 
+                            backgroundColor: '#4CAF50',
                             color: 'white', 
                             border: 'none', 
                             borderRadius: '4px', 

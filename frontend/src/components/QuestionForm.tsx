@@ -728,7 +728,6 @@ export function QuestionForm({ initialData = defaultFormData, onSubmit, title, s
                                
                                                {/* Diagram Section */}
                                                <div style={{ marginBottom: '20px' }}>
-                                                   <label style={{ display: 'block', marginBottom: '8px' }}>Diagrams:</label>
                                                    <DiagramSection 
                                                        diagrams={formData.diagrams}
                                                        onChange={(newDiagrams) => setFormData(prev => ({ 

@@ -54,20 +54,22 @@ export function DiagramEditor({
                     }}
                 />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                    <button
-                        type="button"
-                        onClick={onTogglePreview}
-                        style={{ 
-                            padding: '8px', 
-                            backgroundColor: '#4CAF50', 
-                            color: 'white', 
-                            border: 'none', 
-                            borderRadius: '4px', 
-                            cursor: 'pointer' 
-                        }}
-                    >
-                        {isPreviewOpen ? 'Close Preview' : 'Preview'}
-                    </button>
+                    {!isPreviewOpen && (
+                        <button
+                            type="button"
+                            onClick={onTogglePreview}
+                            style={{ 
+                                padding: '8px', 
+                                backgroundColor: '#4CAF50', 
+                                color: 'white', 
+                                border: 'none', 
+                                borderRadius: '4px', 
+                                cursor: 'pointer' 
+                            }}
+                        >
+                            Preview
+                        </button>
+                    )}
                     <button
                         type="button"
                         onClick={onDelete}
