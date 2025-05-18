@@ -50,13 +50,30 @@ export class OnlineGitRepositoryService {
         personalAccessToken: string
         visibility: Visibility
     }): Promise<Task> {
+        console.log(`[Git Service] Publishing library with params:`, {
+            libraryId: params.libraryId,
+            provider: params.provider,
+            repositoryUrl: params.repositoryUrl,
+            visibility: params.visibility
+        });
+        
         // 1. Create specification using InMemoryService
         const specification = await this.inMemoryService.createPublishedSpecification(params)
+        console.log(`[Git Service] Created specification:`, {
+            id: specification.id,
+            libraryId: specification.libraryId,
+            provider: specification.provider,
+            repositoryUrl: specification.repositoryUrl,
+            visibility: specification.visibility,
+            hasToken: !!specification.personalAccessTokenEncrypted
+        });
 
         // 2. Save to persistent storage
         await this.persistentService.save(specification)
+        console.log(`[Git Service] Saved specification to persistent storage`);
 
         // 3. Call the publish function
+        console.log(`[Git Service] Calling publishLibraryToOnlineGitRepository`);
         return publishLibraryToOnlineGitRepository(specification)
     }
 
