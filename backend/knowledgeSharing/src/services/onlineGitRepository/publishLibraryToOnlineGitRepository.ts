@@ -107,8 +107,67 @@ export async function publishLibraryToOnlineGitRepository(
                 
                 console.log(`[Git Publish] Creating repository with data:`, JSON.stringify(requestData, null, 2));
                 
-                // Create repository exactly where specified in the URL
-                const createEndpoint = `https://api.github.com/orgs/${owner}/repos`;
+                // Step 1: Check if owner is an organization or user
+                let isOrganization = false;
+                let isUser = false;
+
+                // Check if it's an organization
+                try {
+                    await axios.get(
+                        `https://api.github.com/orgs/${owner}`,
+                        {
+                            headers: {
+                                'Authorization': `token ${token}`,
+                                'Accept': 'application/vnd.github.v3+json'
+                            }
+                        }
+                    );
+                    isOrganization = true;
+                    console.log(`[Git Publish] ${owner} is an organization`);
+                } catch (error: any) {
+                    if (error.response?.status === 404) {
+                        console.log(`[Git Publish] ${owner} is not an organization, checking if it's a user`);
+                    } else {
+                        console.error(`[Git Publish] Error checking organization status:`, error.message);
+                        throw new Error(`Failed to verify if ${owner} is an organization`);
+                    }
+                }
+
+                // If not an organization, check if it's a user
+                if (!isOrganization) {
+                    try {
+                        await axios.get(
+                            `https://api.github.com/users/${owner}`,
+                            {
+                                headers: {
+                                    'Authorization': `token ${token}`,
+                                    'Accept': 'application/vnd.github.v3+json'
+                                }
+                            }
+                        );
+                        isUser = true;
+                        console.log(`[Git Publish] ${owner} is a user account`);
+                    } catch (error: any) {
+                        if (error.response?.status === 404) {
+                            console.error(`[Git Publish] ${owner} is neither an organization nor a user account`);
+                            throw new Error(`${owner} does not exist as either an organization or user account`);
+                        } else {
+                            console.error(`[Git Publish] Error checking user status:`, error.message);
+                            throw new Error(`Failed to verify if ${owner} is a user account`);
+                        }
+                    }
+                }
+
+                // Step 2: Create repository in the correct location
+                if (!isOrganization && !isUser) {
+                    throw new Error(`${owner} does not exist as either an organization or user account`);
+                }
+
+                const createEndpoint = isOrganization 
+                    ? `https://api.github.com/orgs/${owner}/repos`
+                    : `https://api.github.com/user/repos`;
+                
+                console.log(`[Git Publish] Creating repository using endpoint: ${createEndpoint}`);
                 
                 try {
                     const response = await axios.post<GitHubApiResponse>(
